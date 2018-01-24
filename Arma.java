@@ -38,7 +38,15 @@ public class Arma
     {
         return fechaRevision;
     }
-    
+    public void caracteristicasArmaRegistrada()
+    {
+        String caracteristicas = "";
+        caracteristicas = "Marca y Modelo del Arma con Nº de serie " + numeroSerie + " es: " + modelo + ".";
+        if(fechaRevision != null){
+            caracteristicas = caracteristicas + "Fecha de la proxima revisión: " + fechaRevision;
+        
+        }
+    }
     
         
     
