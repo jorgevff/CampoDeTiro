@@ -17,16 +17,33 @@ public class CampoDeTiro
         armas = new ArrayList<Arma>();
         numeroIdentificativo = 0;
     }
-    
+
     /**
      * Se añaden 
      */
-   
+
     public void addArma(String modelo, int numeroSerie)
     {
-       
+
         Arma nuevaArma = new Arma(numeroIdentificativo, modelo, numeroSerie);
         numeroIdentificativo++;
         armas.add(nuevaArma);
     }
+
+    public void mostrarArmasRegistradas()
+    {
+        if(armas.size() > 0){
+
+            for(Arma arma : armas){
+                System.out.println(arma.caracteristicasArmaRegistrada());
+
+            }
+        }
+        else{
+            System.out.println("No hay armas registradas");
+        }
+
+    }
+        
+    
 }
