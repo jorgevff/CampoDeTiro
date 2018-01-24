@@ -11,9 +11,11 @@ public class Arma
     private String modelo;
     private int numeroSerie;
     private LocalDate fechaRevision;
+    private int numeroIdentificativo;
     
-    public Arma(String nuevoModelo, int nuevoNumeroSerie)
+    public Arma(int id, String nuevoModelo, int nuevoNumeroSerie)
     {
+        numeroIdentificativo = id;
         modelo = nuevoModelo;
         numeroSerie = nuevoNumeroSerie;
         fechaRevision = null;
@@ -41,7 +43,7 @@ public class Arma
     public String caracteristicasArmaRegistrada()
     {
         String caracteristicas = "";
-        caracteristicas = "Marca y Modelo del Arma con Nº de serie " + numeroSerie + " es: " + modelo + ".";
+        caracteristicas = numeroIdentificativo + " .Marca y Modelo del Arma con Nº de serie " + numeroSerie + " es: " + modelo + ".";
         if(fechaRevision != null){
             caracteristicas = caracteristicas + "Fecha de la proxima revisión: " + fechaRevision;
         
