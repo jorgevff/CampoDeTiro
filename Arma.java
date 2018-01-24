@@ -19,6 +19,29 @@ public class Arma
         fechaRevision = null;
     }
     
+    public String obtenerModelo()
+    {
+        return modelo;
+    }
+    
+    public int obtenerNumeroSerie()
+    {
+        return numeroSerie;
+    }
+    
+    public void fijaFechaRevision(int anio, int mes, int dia)
+    {
+        fechaRevision = LocalDate.of(anio, mes, dia);
+    }
+    
+    public LocalDate fechaRevision()
+    {
+        return fechaRevision;
+    }
+    
+    
+        
+    
     
    
         
