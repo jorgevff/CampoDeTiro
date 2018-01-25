@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.time.LocalDate;
+import java.util.Iterator;
 /**
  * Write a description of class CampoDeTiro here.
  * 
@@ -99,6 +100,18 @@ public class CampoDeTiro
         }
     }
     
-    
+    public void eliminaArmaPorNumSerie(int numeroSerie)
+    {
+        Iterator<Arma> iterador = armas.iterator();
+        while(iterador.hasNext()){
+            Arma armaAEliminar = iterador.next();
+            int numeroSerieBuscar = armaAEliminar.obtenerNumeroSerie();
+            if(numeroSerieBuscar == numeroSerie){
+                iterador.remove();
+            }
+        }
+                    
+        
+    }
 
 }
