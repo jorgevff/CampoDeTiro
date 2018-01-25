@@ -44,6 +44,61 @@ public class CampoDeTiro
         }
 
     }
+
+    public void mostrarArmasPorOrdenDeNumSerie()
+    {
+        ArrayList<Arma> armaABuscar = new ArrayList<Arma>();
+        Arma armaOrdenada = null;
         
+        int indice = 0;
+        while (indice < armas.size()){         
+            armaOrdenada = armas.get(indice);
+            armaABuscar.add(armaOrdenada);
+            indice++;
+        }
+        
+
+        
+
+    }
     
+    public ArrayList<Arma> localizaMayorImprimeYLoBorra(ArrayList<Arma> armaMayorNumero)
+    {
+        ArrayList<Arma> armaABuscar = new ArrayList<Arma>();
+        Arma armaOrdenada = null;
+        int indice = 0;
+        int numeroSerieMayor = 0;
+        while (indice < armaMayorNumero.size()){         
+            armaOrdenada = armaMayorNumero.get(indice);
+            armaABuscar.add(armaOrdenada);
+            if(armaOrdenada.obtenerNumeroSerie() > numeroSerieMayor){
+                numeroSerieMayor = armaOrdenada.obtenerNumeroSerie();
+                System.out.println(armaOrdenada.caracteristicasArmaRegistrada());
+                armaABuscar.remove(armaOrdenada);
+            }
+            indice++;
+        }
+
+        return armaABuscar;
+    }
+    /**
+     * 
+     */
+    
+    public void cambiaFechaRevision(int identificador, int anio, int mes, int dia)
+    {
+        int numId = identificador;
+        int posicion = 0;
+        while(posicion >= 0 && posicion < armas.size()){
+            Arma armaACambiarFecha = armas.get(posicion);
+            
+            if(armaACambiarFecha.numIdentificativo() == numId){
+                armaACambiarFecha.fijaFechaRevision(anio, mes, dia);
+            }
+            posicion++;
+        }
+    }
+    
+    
+
 }

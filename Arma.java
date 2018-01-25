@@ -51,6 +51,11 @@ public class Arma
         return caracteristicas;
     }
     
+    public int numIdentificativo()
+    {
+        return numeroIdentificativo;
+    }
+    
         
     
     
