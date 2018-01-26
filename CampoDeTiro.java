@@ -25,10 +25,11 @@ public class CampoDeTiro
 
     public void addArma(String modelo, int numeroSerie)
     {
-
-        Arma nuevaArma = new Arma(numeroIdentificativo, modelo, numeroSerie);
-        numeroIdentificativo++;
-        armas.add(nuevaArma);
+        if(numeroSerie >= 0){
+            Arma nuevaArma = new Arma(numeroIdentificativo, modelo, numeroSerie);
+            numeroIdentificativo++;
+            armas.add(nuevaArma);
+        }
     }
 
     public void mostrarArmasRegistradas()
@@ -46,60 +47,65 @@ public class CampoDeTiro
 
     }
 
-    public void mostrarArmasPorOrdenDeNumSerie()
+    public ArrayList<Arma> mostrarArmasPorOrdenDeNumSerie()
     {
-        ArrayList<Arma> armaABuscar = new ArrayList<Arma>();
-        Arma armaOrdenada = null;
-        
+        ArrayList<Arma> armasCopia = new ArrayList<Arma>();
+
         int indice = 0;
         while (indice < armas.size()){         
-            armaOrdenada = armas.get(indice);
-            armaABuscar.add(armaOrdenada);
+            armasCopia.add(armas.get(indice));
             indice++;
         }
         
-
         
+        
+        
+        
+        return localizaMayorImprimeYLoBorra(armas);
 
     }
-    
+
     public ArrayList<Arma> localizaMayorImprimeYLoBorra(ArrayList<Arma> armaMayorNumero)
     {
-        ArrayList<Arma> armaABuscar = new ArrayList<Arma>();
-        Arma armaOrdenada = null;
-        int indice = 0;
         int numeroSerieMayor = 0;
+        Arma armaOrdenada = null;
+        int posicionMayor = 0;
+
+        int indice = 0;
         while (indice < armaMayorNumero.size()){         
-            armaOrdenada = armaMayorNumero.get(indice);
-            armaABuscar.add(armaOrdenada);
-            if(armaOrdenada.obtenerNumeroSerie() > numeroSerieMayor){
-                numeroSerieMayor = armaOrdenada.obtenerNumeroSerie();
-                System.out.println(armaOrdenada.caracteristicasArmaRegistrada());
-                armaABuscar.remove(armaOrdenada);
-            }
+            Arma armaActual = armaMayorNumero.get(indice);
+            if(armaActual.obtenerNumeroSerie() > numeroSerieMayor){
+                numeroSerieMayor = armaActual.obtenerNumeroSerie();
+                armaOrdenada = armaActual;
+                posicionMayor = indice;
+                
+            } 
+
             indice++;
         }
+        System.out.println(armaOrdenada.caracteristicasArmaRegistrada());
+        armaMayorNumero.remove(posicionMayor);
 
-        return armaABuscar;
+        return armaMayorNumero;
     }
+
     /**
      * 
      */
-    
+
     public void cambiaFechaRevision(int identificador, int anio, int mes, int dia)
     {
-        int numId = identificador;
         int posicion = 0;
         while(posicion >= 0 && posicion < armas.size()){
             Arma armaACambiarFecha = armas.get(posicion);
-            
-            if(armaACambiarFecha.numIdentificativo() == numId){
+
+            if(armaACambiarFecha.numIdentificativo() == identificador){
                 armaACambiarFecha.fijaFechaRevision(anio, mes, dia);
             }
             posicion++;
         }
     }
-    
+
     public void eliminaArmaPorNumSerie(int numeroSerie)
     {
         Iterator<Arma> iterador = armas.iterator();
@@ -110,8 +116,6 @@ public class CampoDeTiro
                 iterador.remove();
             }
         }
-                    
-        
-    }
 
+    }
 }
