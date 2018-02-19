@@ -10,7 +10,7 @@ public class Test
     public void testCampoTiro()
     {
         System.out.println("Creamos un objeto Campo de Tiro");
-        CampoDeTiro campoDeT1 = new CampoDeTiro();
+        CampoDeTiro campoDeT1 = new CampoDeTiro("");
         System.out.println("####################");
         System.out.println("Añadimos armas registradas al campo");
         campoDeT1.addArma("Revolver Star 38", 1206);
@@ -37,7 +37,7 @@ public class Test
     public void testMayor()
     {
         System.out.println("Creamos un objeto Campo de Tiro");
-        CampoDeTiro campoDeT1 = new CampoDeTiro();
+        CampoDeTiro campoDeT1 = new CampoDeTiro("");
         System.out.println("####################");
         System.out.println("Añadimos armas registradas al campo");
         campoDeT1.addArma("Revolver Star 38", 1206);

@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.time.LocalDate;
 import java.util.Iterator;
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
 /**
  * Write a description of class CampoDeTiro here.
  * 
@@ -13,10 +16,27 @@ public class CampoDeTiro
     private ArrayList<Arma> armas;
     int numeroIdentificativo;
     //Se crea el constructor y se incializa nuestro ArrayList
-    public CampoDeTiro()
+    public CampoDeTiro(String archivoArmas)
     {
         armas = new ArrayList<Arma>();
         numeroIdentificativo = 0;
+        
+        try {
+            File archivo = new File(archivoArmas);
+            Scanner sc = new Scanner(archivo);
+            while (sc.hasNextLine()) {
+                String[] listaArmas = sc.nextLine().split(" # ");
+                addArma(listaArmas[0], Integer.parseInt(listaArmas[1]));
+                
+                
+               
+            }
+            sc.close();
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        
     }
 
     /**
@@ -50,18 +70,20 @@ public class CampoDeTiro
     public ArrayList<Arma> mostrarArmasPorOrdenDeNumSerie()
     {
         ArrayList<Arma> armasCopia = new ArrayList<Arma>();
+        //ArrayList<Arma> armasCopia = new ArrayList<Arma>(armas); asi realizaria una copia tambien
 
         int indice = 0;
         while (indice < armas.size()){         
             armasCopia.add(armas.get(indice));
             indice++;
         }
+        //para ordenar la lista copiada
+        while(armasCopia.size() < 0){
+            armasCopia = localizaMayorImprimeYLoBorra(armasCopia);
+        }
         
         
-        
-        
-        
-        return localizaMayorImprimeYLoBorra(armas);
+        return localizaMayorImprimeYLoBorra(armasCopia);
 
     }
 
@@ -96,11 +118,13 @@ public class CampoDeTiro
     public void cambiaFechaRevision(int identificador, int anio, int mes, int dia)
     {
         int posicion = 0;
-        while(posicion >= 0 && posicion < armas.size()){
+        boolean fechaCambiada = false;
+        while(posicion >= 0 && posicion < armas.size() && !fechaCambiada){
             Arma armaACambiarFecha = armas.get(posicion);
 
             if(armaACambiarFecha.numIdentificativo() == identificador){
                 armaACambiarFecha.fijaFechaRevision(anio, mes, dia);
+                fechaCambiada = true;
             }
             posicion++;
         }
